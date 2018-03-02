@@ -1,7 +1,7 @@
 # nestorFace
 A small faces recognition system.
 
-Two nenecessary data files :
+##Two nenecessary data files :
 
 [shape_predictor_68_face_landmarks](http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2)
 
