@@ -43,7 +43,7 @@ def _face_detecting(img_dir):
                 face_descriptor = face_rec.compute_face_descriptor(img, shape)
                 face_descriptor_thumb.append(face_descriptor)
         else:
-            print("No face in this img!")
+            print("No face in this img!  --->  " + img_dir)
         return(face_descriptor_thumb)
 
     except Exception as e:
@@ -69,8 +69,8 @@ def train(name, faces_file_dir):
         print("Detected face: ", detected_number)
         print(len(descriptor_list))
         print(len(descriptor_list[0]))
-        print(type(descriptor_list[0]))
-        print(images_dir_list)
+        #print(type(descriptor_list[0]))
+        #print(images_dir_list)
 
     except Exception as e:
         print(e)
