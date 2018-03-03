@@ -2,14 +2,14 @@ import sqlite3
 import numpy as np
 
 
-def creat_table(tabel_name_list, db_name):
+def create_table(db_name, table_name_list):
     try:
         conn = sqlite3.connect(db_name)
         c = conn.cursor()
 
-        for i in range(0, len(tabel_name_list)):
+        for i in range(0, len(table_name_list)):
             c.execute("CREATE TABLE {} ([ID] INTEGER PRIMARY KEY AUTOINCREMENT,[KEYPOINT] TEXT NOT NULL);".format(
-                tabel_name_list[i]))
+                table_name_list[i]))
 
         conn.commit()
         conn.close()
@@ -18,13 +18,13 @@ def creat_table(tabel_name_list, db_name):
         print(e)
 
 
-def drop_table(tabel_name_list):
+def drop_table(db_name, table_name_list):
     try:
-        conn = sqlite3.connect('face.db')
+        conn = sqlite3.connect(db_name)
         c = conn.cursor()
 
-        for i in range(0, len(tabel_name_list)):
-            c.execute("DROP TABLE {};".format(tabel_name_list[i]))
+        for i in range(0, len(table_name_list)):
+            c.execute("DROP TABLE {};".format(table_name_list[i]))
 
         conn.commit()
         conn.close()
@@ -32,13 +32,13 @@ def drop_table(tabel_name_list):
         print(e)
 
 
-def append_data(tabel_name, data_list):
+def append_data(db_name, table_name, data_list):
     try:
-        conn = sqlite3.connect('face.db')
+        conn = sqlite3.connect(db_name)
         c = conn.cursor()
 
         for i in range(0, len(data_list)):
-            c.execute("INSERT INTO {} VALUES (NULL, \'{}\');".format(tabel_name, data_list[i]))
+            c.execute("INSERT INTO {} VALUES (NULL, \'{}\');".format(table_name, data_list[i]))
 
         conn.commit()
         conn.close()
@@ -48,22 +48,30 @@ def append_data(tabel_name, data_list):
         print(e)
 
 
-def read_one_tabel_data(tabel_name):
+def read_one_table_data(db_name, table_name):
     try:
-        keypoint_list = []
+        key_point_list = []
 
-        conn = sqlite3.connect('face.db')
+        conn = sqlite3.connect(db_name)
         c = conn.cursor()
 
-        cursor = c.execute("SELECT KEYPOINT from {};".format(tabel_name))
+        cursor = c.execute("SELECT KEYPOINT from {};".format(table_name))
         for i in cursor:
             data_core = np.array(i[0].split())
-            keypoint_list.append(data_core.astype(np.float))
+            key_point_list.append(data_core.astype(np.float))
 
         conn.commit()
         conn.close()
 
-        return (keypoint_list)
+        return key_point_list
 
     except Exception as e:
         print(e)
+
+
+if __name__ == "__main__":
+    create_table("test.db", ["Aen", "Ben"])
+    drop_table("test.db", ["Ben"])
+    create_table("test.db", ["Ben"])
+    append_data("test.db", "Ben", [1, 2, 3])
+    print(read_one_table_data("test.db", "Ben"))

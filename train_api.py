@@ -1,8 +1,9 @@
 import dlib
-import numpy as np
 import cv2
-import file_api
 from skimage import io
+import file_api
+import database_api as db
+
 
 predictor_model = "./model/shape_predictor_68_face_landmarks.dat"
 recognition_model = "./model/dlib_face_recognition_resnet_model_v1.dat"
@@ -44,13 +45,13 @@ def _face_detecting(img_dir):
                 face_descriptor_thumb.append(face_descriptor)
         else:
             print("No face in this img!  --->  " + img_dir)
-        return(face_descriptor_thumb)
+        return face_descriptor_thumb
 
     except Exception as e:
         print(e)
 
 
-def train(name, faces_file_dir):
+def train(name, faces_file_dir, db_name):
     try:
         print(name)
         descriptor_list = []
@@ -65,19 +66,23 @@ def train(name, faces_file_dir):
             else:
                 pass
 
+        db.create_table(db_name, [name])
+        db.append_data(db_name, name, descriptor_list)
+
+
         print("Total images: ", len(images_dir_list))
         print("Detected face: ", detected_number)
         print(len(descriptor_list))
         print(len(descriptor_list[0]))
-        #print(type(descriptor_list[0]))
-        #print(images_dir_list)
+        # print(type(descriptor_list[0]))
+        # print(images_dir_list)
 
     except Exception as e:
         print(e)
 
 
 # if __name__ == '__main__':
-train("Angelina", "./res/Angelina")
+train("Angelina", "./res/Angelina", "face.db")
 
 
 
