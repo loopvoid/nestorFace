@@ -27,14 +27,19 @@ def _face_detecting(img_dir):
                 # Get the landmarks/parts for the face in box d.
 
                 wd = dlib.image_window()
+                wd.clear_overlay()
                 print(img_dir)
                 img = io.imread(img_dir)
                 dlib.image_window.set_image(wd, img)
                 wd.add_overlay(d, dlib.rgb_pixel(255, 0, 0))
-                dlib.hit_enter_to_continue()
 
 
                 shape = shape_predictor(img, d)
+
+                wd.add_overlay(shape)
+                dlib.hit_enter_to_continue()
+
+
                 face_descriptor = face_rec.compute_face_descriptor(img, shape)
                 face_descriptor_thumb.append(face_descriptor)
         else:
