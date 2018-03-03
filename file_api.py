@@ -52,7 +52,7 @@ def get_img_list(img_files_dir):
             break
         filelist=[]
         for i in files:
-            filelist.append(img_files_dir+'\\'+i)
+            filelist.append(img_files_dir+'/'+i)
         return(filelist)
 
     except Exception as e:
