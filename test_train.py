@@ -1,3 +1,3 @@
 import train_api
 
-train_api.train("Angelina", "./res/Angelina", "face.db")
+train_api.initial_train("Angelina", "./res/Angelina", "./database/face.db")
