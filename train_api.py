@@ -81,8 +81,5 @@ def train(name, faces_file_dir, db_name):
         print(e)
 
 
-# if __name__ == '__main__':
-train("Angelina", "./res/Angelina", "face.db")
-
 
 
