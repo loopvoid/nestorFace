@@ -30,6 +30,6 @@ setuptools-scm==1.15.7
 six==1.11.0
 SQLAlchemy==1.2.4
 SQLite3Database==0.2.0
-urllib3==1.22
+urllib3==1.24.2
 yarg==0.1.9
 zetup==0.2.42
