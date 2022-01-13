@@ -16,7 +16,7 @@ orderedmultidict==0.7.11
 packaging==17.1
 path.py==11.0
 peppercorn==0.5
-Pillow==5.0.0
+Pillow==9.0.0
 pipreqs==0.4.9
 pyboost==0.1.dev18
 pyparsing==2.2.0
