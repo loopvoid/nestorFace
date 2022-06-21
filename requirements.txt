@@ -10,7 +10,7 @@ idna==2.6
 Mastodon.py==1.2.2
 matplotlib==2.1.2
 networkx==2.1
-numpy==1.14.1
+numpy==1.22.0
 opencv-python==3.4.0.12
 orderedmultidict==0.7.11
 packaging==17.1
